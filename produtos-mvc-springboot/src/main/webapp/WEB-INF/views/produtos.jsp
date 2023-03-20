@@ -46,6 +46,9 @@
             			<div class="col-md-12">
 							<h2 class="fonte-titulo texto-cor-especial">Produtos</h2>
 							<a class="btn btn-secondary" href="${contextPath}/produto/new">Novo Produto</a>
+							<c:if test = "${not empty message}">
+								<h3 class="alert alert-warning"> ${message} </h3>
+							</c:if>
 						</div>
 					</div>
 				</div>

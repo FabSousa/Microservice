@@ -2,12 +2,13 @@ package br.com.fiap.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.validation.BindingResultUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fiap.model.ProdutoModel;
 import br.com.fiap.repository.ProdutoRepository;
@@ -15,7 +16,7 @@ import br.com.fiap.repository.ProdutoRepository;
 @Controller
 public class ProdutoController {
 	
-	ProdutoRepository repository = new ProdutoRepository();
+	private ProdutoRepository repository = ProdutoRepository.getInstance();
 	
 	@RequestMapping("/produtos")
 	public String findAll(Model model) {
@@ -35,15 +36,17 @@ public class ProdutoController {
 	}
 	
 	@PostMapping("/produto/new")
-	public String save(ProdutoModel produto) {
+	public String save(ProdutoModel produto, RedirectAttributes redirectAttributes) {
 		repository.save(produto);
-		return "produto-novo-sucesso";
+		redirectAttributes.addFlashAttribute("message", "produto cadastrado com sucesso");
+		return "redirect:/produtos";
 	}
 	
 	@GetMapping(value="/produto/delete/{id}")
-	public String delete(@PathVariable("id") Long id, Model model) {
+	public String delete(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
 		repository.delete(id);
 		model.addAttribute("produtos", repository.findAll());
+		redirectAttributes.addFlashAttribute("message", "produto deletado com sucesso");
 		return "redirect:/produtos";
 	}
 	
@@ -54,8 +57,9 @@ public class ProdutoController {
 	}
 	
 	@PostMapping("/produto/edit/{id}")
-	public String edit(@PathVariable("id") Long id, ProdutoModel produto) {
+	public String edit(@PathVariable("id") Long id, ProdutoModel produto, RedirectAttributes redirectAttributes) {
 		repository.edit(produto, id);
-		return "produto-edit-sucesso";
+		redirectAttributes.addFlashAttribute("message", "produto editado com sucesso");
+		return "redirect:/produtos";
 	}
 }
