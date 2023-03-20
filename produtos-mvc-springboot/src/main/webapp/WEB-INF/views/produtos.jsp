@@ -3,6 +3,7 @@
 <!-- TAGS NECESSARIAS PARA UTLIZARMOS O JSTL E OS RECURSOS DO SPRING -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html>
@@ -46,8 +47,8 @@
             			<div class="col-md-12">
 							<h2 class="fonte-titulo texto-cor-especial">Produtos</h2>
 							<a class="btn btn-secondary" href="${contextPath}/produto/new">Novo Produto</a>
-							<c:if test = "${not empty message}">
-								<h3 class="alert alert-warning"> ${message} </h3>
+							<c:if test = "${not empty messages}">
+								<h3 class = "alert alert-warning">${messages}</h3>
 							</c:if>
 						</div>
 					</div>
@@ -69,9 +70,12 @@
 				      <td>${produto.nome}</td>
 				      <td>${produto.preco}</td>
 				      <td>
+				      
+				      <form:form action="${contextPath}/produto/delete/${produto.id}" method = "delete">
 				          <a href="${contextPath}/produto/${produto.id}"  class="btn btn-success btn-sm">Detalhes</a>
-					      <a href="${contextPath}/produto/edit/${produto.id}"  class="btn btn-warning btn-sm">Editar</a>
-					      <a href="${contextPath}/produto/delete/${produto.id}"  class="btn btn-danger btn-sm">Excluir</a>
+					      <a href="${contextPath}/produto/update/${produto.id}"  class="btn btn-warning btn-sm">Editar</a>
+					      <input type = "submit" value = "Excluir" class = "btn btn-danger btn-sm">
+					  </form:form>
 					  </td>
 				    </tr>
 			    </c:forEach>

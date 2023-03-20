@@ -61,7 +61,7 @@
 							<p class="fs-6 m-0"><b>Preço:</b> ${produto.preco}</p>
 						</div>
 						<div class="form-group">
-							<p class="fs-6 m-0"><b>Características:</b> ${produto.caracteristica}</p>
+							<p class="fs-6 m-0"><b>Características:</b> ${produto.caracteristicas}</p>
 						</div>
 						<hr>
 						<div class="d-grid gap-2 col-6">
