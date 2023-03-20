@@ -1,5 +1,8 @@
 package br.com.fiap.model;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Size;
+
 public class ProdutoModel {
 	private Long id;
 	private double preco;
@@ -27,6 +30,7 @@ public class ProdutoModel {
 		this.id = id;
 	}
 
+	@DecimalMin(value = "0.1", message = "Preço deve ser acima de 0.0")
 	public double getPreco() {
 		return preco;
 	}
@@ -35,6 +39,7 @@ public class ProdutoModel {
 		this.preco = preco;
 	}
 
+	@Size(min = 2, max = 40, message = "Nome deve ter no minimo 2 e no maximo 40 caracteres")
 	public String getNome() {
 		return nome;
 	}
@@ -42,7 +47,8 @@ public class ProdutoModel {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
+	@Size(min = 2, max = 8, message = "SKU deve conter 8 caracteres")
 	public String getSku() {
 		return sku;
 	}
@@ -50,7 +56,8 @@ public class ProdutoModel {
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
-
+	
+	@Size(min = 1, max = 200, message = "Descrção deve ter no minimo 1 e no maximo 200 caracteres")
 	public String getDescricao() {
 		return descricao;
 	}
@@ -58,7 +65,8 @@ public class ProdutoModel {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	
+	@Size(min = 1, max = 200, message = "Caracteristicas deve ter no minimo 1 e no maximo 200 caracteres")
 	public String getCaracteristica() {
 		return caracteristica;
 	}
