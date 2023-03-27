@@ -46,7 +46,7 @@
         			<div class="row">
             			<div class="col-md-12">
 							<h2 class="fonte-titulo texto-cor-especial">Produtos</h2>
-							<a class="btn btn-secondary" href="${contextPath}/produto/new">Novo Produto</a>
+							<a class="btn btn-secondary" href="${contextPath}/produto/form?page=produto-novo">Novo Produto</a>
 							<c:if test = "${not empty messages}">
 								<h3 class = "alert alert-warning">${messages}</h3>
 							</c:if>
@@ -71,9 +71,9 @@
 				      <td>${produto.preco}</td>
 				      <td>
 				      
-				      <form:form action="${contextPath}/produto/delete/${produto.id}" method = "delete">
+				      <form:form action="${contextPath}/produto/${produto.id}" method = "delete">
 				          <a href="${contextPath}/produto/${produto.id}"  class="btn btn-success btn-sm">Detalhes</a>
-					      <a href="${contextPath}/produto/update/${produto.id}"  class="btn btn-warning btn-sm">Editar</a>
+					      <a href="${contextPath}/produto/form?page=produto-editar&id=${produto.id}"  class="btn btn-warning btn-sm">Editar</a>
 					      <input type = "submit" value = "Excluir" class = "btn btn-danger btn-sm">
 					  </form:form>
 					  </td>

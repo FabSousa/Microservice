@@ -49,7 +49,7 @@
 						
 						<h2 class="fonte-titulo texto-cor-especial">Produto</h2>
 						
-						<form:form modelAttribute="produtoModel" action="${contextPath}/produto/update" method="post">
+						<form:form modelAttribute="produtoModel" action="${contextPath}/produto/${produtoModel.id}" method="post">
 						
 							<spring:hasBindErrors name="produtoModel">
 								<div>
@@ -91,8 +91,8 @@
 							</div>
 							<hr>
 							
-							<a class="btn btn-secondary btn-sm" href="${contextPath}/produtos">Cancelar</a>
-							<form:button type="submit" class="btn btn-primary btn-sm">Gravar</form:button>
+							<a class="btn btn-secondary btn-sm" href="${contextPath}/produto">Cancelar</a>
+							<form:button type="submit" class="btn btn-primary btn-sm">Editar</form:button>
 						</form:form>
 	                </div>
 	            </div>

@@ -65,7 +65,7 @@
 						</div>
 						<hr>
 						<div class="d-grid gap-2 col-6">
-							<a class="btn btn-primary btn-sm" href="${contextPath}/produtos">Voltar</a>
+							<a class="btn btn-primary btn-sm" href="${contextPath}/produto">Voltar</a>
 						</div>
                     </form>
 	            </div>
