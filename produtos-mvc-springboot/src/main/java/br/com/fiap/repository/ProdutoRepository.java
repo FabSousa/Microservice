@@ -1,67 +1,55 @@
 package br.com.fiap.repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import br.com.fiap.model.ProdutoModel;
 
+@Repository
 public class ProdutoRepository {
 
-	private static Map<Long, ProdutoModel> produtos;
+    @Autowired
+	public JdbcTemplate jdbcTemplate;
 	
-	private static ProdutoRepository instance;
+	private static final String GET_ALL = "SELECT * FROM TB_PRODUTO";
+	private static final String GET_BY_ID = "SELECT * FROM TB_PRODUTO WHERE ID=?";
+	private static final String SAVE ="INSERT INTO TB_PRODUTO (NOME, SKU, DESCRICAO, CARACTERISTICAS, PRECO) VALUES (?, ?, ?, ?, ?)";
+	private static final String UPDATE = "UPDATE TB_PRODUTO SET NOME=?,SKU=?,DESCRICAO=?,CARACTERISTICAS=?,PRECO=? WHERE ID=?";
+	private static final String DELETE = "DELETE FROM TB_PRODUTO WHERE ID=?";
+	
 
-	private ProdutoRepository() {
-
-		produtos = new HashMap<Long, ProdutoModel>();
-
-		produtos.put(1L,
-				new ProdutoModel(1L, "Nome Produto 1", "SKU1", "Descricao Produto 1", 100.00, "Detalhe Produto 1"));
-		produtos.put(2L,
-				new ProdutoModel(2L, "Nome Produto 2", "SKU2", "Descricao Produto 2", 200.00, "Detalhe Produto 2"));
-		produtos.put(3L,
-				new ProdutoModel(3L, "Nome Produto 3", "SKU3", "Descricao Produto 3", 300.00, "Detalhe Produto 3"));
-
+	public List<ProdutoModel> findAll() {
+		return this.jdbcTemplate.query(GET_ALL, new BeanPropertyRowMapper<ProdutoModel>(ProdutoModel.class));
 	}
 	
-	// SINGLETON
-	public static ProdutoRepository getInstance() {
-		
-		if (instance == null) {
-			
-			instance = new ProdutoRepository();
-		}
-		
-		return instance;
-	}
-
-	public ArrayList<ProdutoModel> findAll() {
-
-		return new ArrayList<>(produtos.values());
-	}
-	
-	public ProdutoModel findById(long id) {
-		
-		return produtos.get(id);
+	public ProdutoModel findById(Long id) {
+		 return jdbcTemplate.queryForObject(GET_BY_ID, new BeanPropertyRowMapper<ProdutoModel>(ProdutoModel.class),id);
 	}
 	
 	public void update(ProdutoModel produtoModel) {
-		
-		produtos.put(produtoModel.getId(), produtoModel);
+		this.jdbcTemplate.update(UPDATE, 
+				produtoModel.getNome(),
+				produtoModel.getSku(),
+				produtoModel.getDescricao(),
+				produtoModel.getCaracteristicas(),
+				produtoModel.getPreco(),
+				produtoModel.getId());
 	}
 
 	public void save(ProdutoModel produto) {
-		
-		long newID = (long) (produtos.size() + 1);
-		
-		produto.setId(newID);
-		
-		produtos.put(newID, produto);
+		this.jdbcTemplate.update(SAVE, 
+				produto.getNome(),
+				produto.getSku(),
+				produto.getDescricao(),
+				produto.getCaracteristicas(),
+				produto.getPreco());
 	}
 	
 	public void deleteById(long id) {
-		
-		produtos.remove(id);
+		this.jdbcTemplate.update(DELETE,id);
 	}
 }

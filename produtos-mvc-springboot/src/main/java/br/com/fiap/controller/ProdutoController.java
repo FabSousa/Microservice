@@ -1,5 +1,8 @@
 package br.com.fiap.controller;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,82 +17,69 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fiap.model.ProdutoModel;
 import br.com.fiap.repository.ProdutoRepository;
-import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/produto")
+@RequestMapping("/produtos")
 public class ProdutoController {
 
-	ProdutoRepository repository = ProdutoRepository.getInstance();
+	@Autowired
+	ProdutoRepository repository;
 	
-	@GetMapping("/form")
-	public String open(@RequestParam String page, @RequestParam(required = false) Long id, 
-			@ModelAttribute("produtoModel") ProdutoModel produtoModel, Model model) {
-		if(page.equals("produto-editar"))
-			model.addAttribute("produtoModel", repository.findById(id));
-		
-		return page;
-	}
+	private static final String PRODUTO_FOLDER = "produto/";
 
-	@RequestMapping()
+	@GetMapping
 	public String findAll(Model model) {
-
 		model.addAttribute("produtos", repository.findAll());
-
-		return "produtos";
+		return PRODUTO_FOLDER+"produtos";
 	}
-	
+
+	@GetMapping("/form")
+	public String open(@RequestParam("page") String page, @RequestParam(required = false) Long id,
+			@ModelAttribute("produtoModel") ProdutoModel produtoModel, Model model) {
+
+		if ("produto-editar".equals(page)) {
+			model.addAttribute("produtoModel", repository.findById(id));
+		}
+
+		return PRODUTO_FOLDER+page;
+	}
+
 	@GetMapping("/{id}")
 	public String findById(@PathVariable("id") long id, Model model) {
-		
 		model.addAttribute("produto", repository.findById(id));
-		
-		return "produto-detalhe";
+		return PRODUTO_FOLDER+"produto-detalhe";
 	}
-	
-//	@GetMapping("/new")
-//	public String openSave(@ModelAttribute("produtoModel") ProdutoModel produtoModel) {
-//		
-//		return "produto-novo";
-//	}
-	
 
-	@PostMapping()
-	public String save(@Valid ProdutoModel produto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-		if(bindingResult.hasErrors())
-			return "produto-novo";
-		
+	@PostMapping
+	public String save(@Valid ProdutoModel produto, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors()) {
+			return PRODUTO_FOLDER+"produto-novo";
+		}
+
 		repository.save(produto);
 		redirectAttributes.addFlashAttribute("messages", "Produto cadastrado com sucesso!");
-		return "redirect:/produto";
+		return "redirect:/produtos";
 	}
 	
-//	@GetMapping("/update/{id}")
-//	public String openUpdate(@PathVariable("id") long id, @ModelAttribute("produtoModel") ProdutoModel produtoModel, Model model) {
-//		
-//		model.addAttribute("produto", repository.findById(id));
-//		
-//		return "produto-editar";
-//	}
-	
 	@PostMapping("/{id}")
-	public String update(@PathVariable("id") long id, Model model, @Valid ProdutoModel produtoModel, 
-			BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-		if(bindingResult.hasErrors())
-			return "produto-editar";
-		
+	public String update(@PathVariable("id") long id, Model model, @Valid ProdutoModel produtoModel,
+			RedirectAttributes redirectAttributes) {
+
 		produtoModel.setId(id);
 		repository.update(produtoModel);
 		redirectAttributes.addFlashAttribute("messages", "Produto atualizado com sucesso!");
 		model.addAttribute("produtos", repository.findAll());
-		return "redirect:/produto";
+		return "redirect:/produtos";
+
 	}
 
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping("/{id}")
 	public String delete(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes) {
 		repository.deleteById(id);
-		redirectAttributes.addFlashAttribute("messages", "Produto excluido com sucesso!");
+		redirectAttributes.addFlashAttribute("messages", "Produto excluído com sucesso!");
 		model.addAttribute("produtos", repository.findAll());
-		return "redirect:/produto";
+		return "redirect:/produtos";
 	}
+
 }

@@ -49,26 +49,26 @@
 						
 						<h2 class="fonte-titulo texto-cor-especial">Produto</h2>
 						
-						<form:form modelAttribute="produtoModel" action="${contextPath}/produto/${produtoModel.id}" method="post">
+						<form:form modelAttribute="produtoModel" action="${contextPath}/produtos/${produtoModel.id}" method="post">
 						
 							<spring:hasBindErrors name="produtoModel">
 								<div>
 									<form:errors path="*" class="has-error"></form:errors>
 								</div>
 							</spring:hasBindErrors>
-						
-							<div class="form-group">
-								<form:input type="hidden" name="id" id="id" path="id" value="${produto.id}" />
+							
+						    <div class="form-group">
+								<form:input type="hidden" name="id" id="id" path="id" value="${produtoModel.id}" />
 	                        </div>
 							
 							<div class="form-group">
 								<label class="control-label" for="nome">Nome:</label>
-								<form:input type="text" name="nome" id="nome" path="nome" value="${produto.nome}" class="form-control" maxlength="50" size="50" oninvalid="this.setCustomValidity('Enter User Name Here')" oninput="setCustomValidity('')"/>
+								<form:input type="text" name="nome" id="nome" path="nome" value="${produtoModel.nome}" class="form-control" maxlength="50" size="50" oninvalid="this.setCustomValidity('Enter User Name Here')" oninput="setCustomValidity('')"/>
 	                       		<font color="red"><form:errors path="nome"/></font>
 	                        </div>
 	                        <div class="form-group">
 								<label class="control-label" for="nome">SKU:</label>
-								<form:input type="text" name="sku" id="sku" path="sku" value="${produto.sku}" class="form-control" maxlength="50" size="50" />
+								<form:input type="text" name="sku" id="sku" path="sku" value="${produtoModel.sku}" class="form-control" maxlength="50" size="50" />
 								<font color="red"><form:errors path="nome"/></font>
 							</div>
 							
@@ -80,7 +80,7 @@
 							
 							<div class="form-group">
 								<label class="control-label" for="preco">Preço:</label>
-								<form:input type="number" step="any" min="0" name="preco" path="preco" id="preco" value="${produto.preco}" class="form-control" maxlength="14" size="15" />
+								<form:input type="number" step="any" min="0" name="preco" path="preco" id="preco" value="${produtoModel.preco}" class="form-control" maxlength="14" size="15" />
 								<font color="red"><form:errors path="preco"/></font>
 							</div>
 							
@@ -91,8 +91,8 @@
 							</div>
 							<hr>
 							
-							<a class="btn btn-secondary btn-sm" href="${contextPath}/produto">Cancelar</a>
-							<form:button type="submit" class="btn btn-primary btn-sm">Editar</form:button>
+							<a class="btn btn-secondary btn-sm" href="${contextPath}/produtos">Cancelar</a>
+							<form:button type="submit" class="btn btn-primary btn-sm">Gravar</form:button>
 						</form:form>
 	                </div>
 	            </div>
