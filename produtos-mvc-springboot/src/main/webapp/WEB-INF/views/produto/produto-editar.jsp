@@ -66,14 +66,22 @@
 								<form:input type="text" name="nome" id="nome" path="nome" value="${produtoModel.nome}" class="form-control" maxlength="50" size="50" oninvalid="this.setCustomValidity('Enter User Name Here')" oninput="setCustomValidity('')"/>
 	                       		<font color="red"><form:errors path="nome"/></font>
 	                        </div>
+	                        
 	                        <div class="form-group">
-								<label class="control-label" for="nome">SKU:</label>
+								<label class="control-label" for="sku">SKU:</label>
 								<form:input type="text" name="sku" id="sku" path="sku" value="${produtoModel.sku}" class="form-control" maxlength="50" size="50" />
-								<font color="red"><form:errors path="nome"/></font>
+								<font color="red"><form:errors path="sku"/></font>
 							</div>
+	                        
+	                        <div class="form-group">
+								<label class="control-label" for="categoria">Categorias:</label>
+								<form:select path="categoria.id">
+									<form:options items="${categorias}" itemValue="id" itemLabel="nome"/>
+								</form:select>
+								</div>
 							
 							<div class="form-group">
-								<label class="control-label" for="mesnagem">Descrição:</label>
+								<label class="control-label" for="mensagem">Descrição:</label>
 								<form:textarea id="descricao" class="form-control" name="descricao" path="descricao" rows="4" cols="100"></form:textarea>
 								<font color="red"><form:errors path="descricao"/></font>
 							</div>

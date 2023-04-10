@@ -69,6 +69,13 @@
 								</div>
 								
 								<div class="form-group">
+								<label class="control-label" for="categoria">Categorias:</label>
+								<form:select path="categoria.id">
+									<form:options items="${categorias}" itemValue="id" itemLabel="nome"/>
+								</form:select>
+								</div>
+								
+								<div class="form-group">
 									<label class="control-label" for="descricao">Descrição:</label>
 									<form:textarea class="form-control" path="descricao" name="descricao" id="descricao" rows="4" cols="100"  />
 									<font color="red"><form:errors path="descricao" /></font><br/>

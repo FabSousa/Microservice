@@ -61,7 +61,7 @@
 			  <tbody>
 			  <c:forEach items="${categorias}" var="categoria">
 				    <tr>
-				      <td>${categoria.nome}</td>
+				      <td>${categoria.nomeCategoria}</td>
 				      <td>
 				      	  <form:form action="${contextPath}/categorias/${categoria.id}" method="delete">
 					          <a href="${contextPath}/categorias/${categoria.id}"  class="btn btn-success btn-sm">Detalhes</a>

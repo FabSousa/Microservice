@@ -5,35 +5,35 @@ import jakarta.validation.constraints.Size;
 
 public class CategoriaModel {
 	
-	private Long id;
-	private String nome;
+	private Long idCategoria;
+	private String nomeCategoria;
 	
 	public CategoriaModel() {
 		super();
 	}
 	
-	public CategoriaModel(Long id, String nome) {
+	public CategoriaModel(Long id, String nomeCategoria) {
 		super();
-		this.id = id;
-		this.nome = nome;
+		this.idCategoria = id;
+		this.nomeCategoria = nomeCategoria;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getIdCategoria() {
+		return idCategoria;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdCategoria(Long id) {
+		this.idCategoria = id;
 	}
 
 	@NotNull(message = "Nome é obrigatório")
 	@Size(min = 2, max = 50, message = "Nome deve ter entre 2 e 50 caracteres")
-	public String getNome() {
-		return nome;
+	public String getNomeCategoria() {
+		return nomeCategoria;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeCategoria(String nome) {
+		this.nomeCategoria = nome;
 	}
 	
 	

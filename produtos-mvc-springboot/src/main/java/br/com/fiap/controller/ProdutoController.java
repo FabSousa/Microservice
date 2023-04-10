@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fiap.model.ProdutoModel;
+import br.com.fiap.repository.CategoriaRepository;
 import br.com.fiap.repository.ProdutoRepository;
 
 @Controller
@@ -24,6 +25,8 @@ public class ProdutoController {
 
 	@Autowired
 	ProdutoRepository repository;
+	@Autowired
+	CategoriaRepository categoriaRepository;
 	
 	private static final String PRODUTO_FOLDER = "produto/";
 
@@ -40,6 +43,8 @@ public class ProdutoController {
 		if ("produto-editar".equals(page)) {
 			model.addAttribute("produtoModel", repository.findById(id));
 		}
+		
+		model.addAttribute("categorias", categoriaRepository.findAll());
 
 		return PRODUTO_FOLDER+page;
 	}

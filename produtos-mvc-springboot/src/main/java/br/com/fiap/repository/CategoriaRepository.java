@@ -31,13 +31,13 @@ public class CategoriaRepository {
 
 	public void save(CategoriaModel categoria) {
 		this.jdbcTemplate.update(SAVE, 
-				categoria.getNome());
+				categoria.getNomeCategoria());
 	}
 	
 	public void update(CategoriaModel categoriaModel) {
 		this.jdbcTemplate.update(UPDATE, 
-				categoriaModel.getNome(),
-				categoriaModel.getId());
+				categoriaModel.getNomeCategoria(),
+				categoriaModel.getIdCategoria());
 	}
 	
 	public void deleteById(long id) {

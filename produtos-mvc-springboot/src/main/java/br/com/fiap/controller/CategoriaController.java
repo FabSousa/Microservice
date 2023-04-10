@@ -67,7 +67,7 @@ public class CategoriaController {
 	public String update(@PathVariable("id") long id, Model model, @Valid CategoriaModel categoriaModel,
 			RedirectAttributes redirectAttributes) {
 
-		categoriaModel.setId(id);
+		categoriaModel.setIdCategoria(id);
 		repository.update(categoriaModel);
 		redirectAttributes.addFlashAttribute("messages", "Categoria atualizada com sucesso!");
 		model.addAttribute("categorias", repository.findAll());

@@ -55,6 +55,7 @@
 			<thead>
 			    <tr>
 			      <th scope="col">Nome</th>
+			      <th scope="col">Categoria</th>
 			      <th scope="col">Preço</th>
 			      <th scope="col">Ações</th>
 			    </tr>
@@ -63,6 +64,7 @@
 			  <c:forEach items="${produtos}" var="produto">
 				    <tr>
 				      <td>${produto.nome}</td>
+				      <td>${produto.categoria.nomeCategoria}</td>
 				      <td>${produto.preco}</td>
 				      <td>
 				      	  <form:form action="${contextPath}/produtos/${produto.id}" method="delete">

@@ -49,7 +49,7 @@
 					<form>
 						<h2 class="fonte-titulo texto-cor-especial">categoria</h2>
 						<div class="form-group">
-							<p class="fs-6 m-0"><b>Nome:</b> ${categoria.nome}</p>
+							<p class="fs-6 m-0"><b>Nome:</b> ${categoria.nomeCategoria}</p>
                         </div>
 						<hr>
 						<div class="d-grid gap-2 col-6">
