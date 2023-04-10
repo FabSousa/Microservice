@@ -12,27 +12,35 @@ import br.fiap.repository.mapping.ProdutoRowMapper;
 @Repository
 public class ProdutoRepository {
 
-    @Autowired
+	@Autowired
 	public JdbcTemplate jdbcTemplate;
-	//TODO ID CATEGORIA ALIAS
-	private static final String GET_ALL = "SELECT P.ID, P.NOME, C.NOME AS NOME_CATEGORIA, P.SKU, P.DESCRICAO, P.CARACTERISTICAS, P.PRECO "
-										+ "FROM TB_PRODUTO P INNER JOIN TB_CATEGORIA C ON P.ID_CATEGORIA = C.ID";
-	private static final String GET_BY_ID = "SELECT * "
-										+ "FROM TB_PRODUTO P INNER JOIN TB_CATEGORIA C ON P.ID_CATEGORIA = C.ID WHERE P.ID=?";
-	private static final String SAVE ="INSERT INTO TB_PRODUTO (NOME, SKU, DESCRICAO, CARACTERISTICAS, PRECO, ID_CATEGORIA) "
-										+ "VALUES (?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE = "UPDATE TB_PRODUTO SET NOME=?,SKU=?,DESCRICAO=?,CARACTERISTICAS=?,PRECO=?,ID_CATEGORIA=? WHERE ID=?";
-	private static final String DELETE = "DELETE FROM TB_PRODUTO WHERE ID=?";
 	
+	private static final String GET_ALL = "SELECT * FROM TB_PRODUTO P INNER JOIN TB_CATEGORIA C"
+										+ " ON P.ID_CATEGORIA = C.ID_CATEGORIA"
+										+ " ORDER BY P.ID";
+	
+	private static final String GET_BY_ID = "SELECT * FROM TB_PRODUTO P INNER JOIN TB_CATEGORIA C"
+											+ " ON P.ID_CATEGORIA = C.ID_CATEGORIA"
+											+ " WHERE P.ID=?";
+	
+	private static final String SAVE = "INSERT INTO TB_PRODUTO (NOME, SKU, DESCRICAO, CARACTERISTICAS, PRECO, ID_CATEGORIA) "
+										+ "VALUES (?, ?, ?, ?, ?, ?)";
+	
+	private static final String UPDATE = "UPDATE TB_PRODUTO SET"
+										+ " NOME=?, SKU=?, DESCRICAO=?, CARACTERISTICAS=?, PRECO=?, ID_CATEGORIA=?"
+										+ " WHERE ID=?";
+	
+	private static final String DELETE = "DELETE FROM TB_PRODUTO WHERE ID=?";
+
 
 	public List<ProdutoModel> findAll() {
 		return this.jdbcTemplate.query(GET_ALL, new ProdutoRowMapper());
 	}
-	
+
 	public ProdutoModel findById(Long id) {
-		 return jdbcTemplate.queryForObject(GET_BY_ID, new ProdutoRowMapper(), id);
+		return jdbcTemplate.queryForObject(GET_BY_ID, new ProdutoRowMapper(), id);
 	}
-	
+
 	public void update(ProdutoModel produtoModel) {
 		this.jdbcTemplate.update(UPDATE, 
 				produtoModel.getNome(),
@@ -50,10 +58,10 @@ public class ProdutoRepository {
 				produto.getSku(),
 				produto.getDescricao(),
 				produto.getCaracteristicas(),
-				produto.getPreco());
-				produto.getCategoria().getIdCategoria();
+				produto.getPreco(),
+				produto.getCategoria().getIdCategoria());
 	}
-	
+
 	public void deleteById(long id) {
 		this.jdbcTemplate.update(DELETE,id);
 	}

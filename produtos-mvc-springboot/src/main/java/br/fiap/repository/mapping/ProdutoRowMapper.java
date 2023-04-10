@@ -17,9 +17,6 @@ public class ProdutoRowMapper implements RowMapper<ProdutoModel> {
 		ProdutoModel produtoModel = new BeanPropertyRowMapper<>(ProdutoModel.class).mapRow(rs, rowNum);
 		CategoriaModel categoriaoModel = new BeanPropertyRowMapper<>(CategoriaModel.class).mapRow(rs, rowNum);
 		
-		System.out.println(produtoModel + " " + produtoModel.getNome());
-		System.out.println(categoriaoModel + " " + categoriaoModel.getNomeCategoria());
-		
 		produtoModel.setCategoria(categoriaoModel);
 		
 		return produtoModel;

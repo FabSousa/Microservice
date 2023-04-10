@@ -63,10 +63,10 @@
 				    <tr>
 				      <td>${categoria.nomeCategoria}</td>
 				      <td>
-				      	  <form:form action="${contextPath}/categorias/${categoria.id}" method="delete">
-					          <a href="${contextPath}/categorias/${categoria.id}"  class="btn btn-success btn-sm">Detalhes</a>
+				      	  <form:form action="${contextPath}/categorias/${categoria.idCategoria}" method="delete">
+					          <a href="${contextPath}/categorias/${categoria.idCategoria}"  class="btn btn-success btn-sm">Detalhes</a>
 					          
-						      <a href="${contextPath}/categorias/form?page=categoria-editar&id=${categoria.id}"  class="btn btn-warning btn-sm">Editar</a>
+						      <a href="${contextPath}/categorias/form?page=categoria-editar&id=${categoria.idCategoria}"  class="btn btn-warning btn-sm">Editar</a>
 						      
 						      <input type="submit" value="Excluir" class="btn btn-danger btn-sm">
 						  </form:form>

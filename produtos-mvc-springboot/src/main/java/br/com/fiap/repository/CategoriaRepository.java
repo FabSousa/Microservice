@@ -16,10 +16,10 @@ public class CategoriaRepository {
 	public JdbcTemplate jdbcTemplate;
 	
 	private static final String GET_ALL = "SELECT * FROM TB_CATEGORIA";
-	private static final String GET_BY_ID = "SELECT * FROM TB_CATEGORIA WHERE ID=?";
-	private static final String SAVE ="INSERT INTO TB_CATEGORIA (NOME) VALUES (?)";
-	private static final String UPDATE = "UPDATE TB_CATEGORIA SET NOME=? WHERE ID=?";
-	private static final String DELETE = "DELETE FROM TB_CATEGORIA WHERE ID=?";
+	private static final String GET_BY_ID = "SELECT * FROM TB_CATEGORIA WHERE ID_CATEGORIA=?";
+	private static final String SAVE ="INSERT INTO TB_CATEGORIA (NOME_CATEGORIA) VALUES (?)";
+	private static final String UPDATE = "UPDATE TB_CATEGORIA SET NOME_CATEGORIA=? WHERE ID_CATEGORIA=?";
+	private static final String DELETE = "DELETE FROM TB_CATEGORIA WHERE ID_CATEGORIA==?";
 	
 	public List<CategoriaModel> findAll() {
 		return this.jdbcTemplate.query(GET_ALL, new BeanPropertyRowMapper<CategoriaModel>(CategoriaModel.class));

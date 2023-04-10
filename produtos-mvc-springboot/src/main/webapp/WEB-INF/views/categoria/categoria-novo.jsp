@@ -60,7 +60,7 @@
 								<div class="form-group">
 									<label class="control-label" for="nome">Nome:</label>
 									<form:input type="text" path="nome" name="nome" id="nome" value="" class="form-control" maxlength="50" size="50" />
-									<font color="red"><form:errors path="nome" /></font><br/>
+									<font color="red"><form:errors path="nomeCategoria" /></font><br/>
 		                        </div>
 
 								

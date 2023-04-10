@@ -75,8 +75,8 @@
 	                        
 	                        <div class="form-group">
 								<label class="control-label" for="categoria">Categorias:</label>
-								<form:select path="categoria.id">
-									<form:options items="${categorias}" itemValue="id" itemLabel="nome"/>
+								<form:select path="categoria.idCategoria">
+									<form:options items="${categorias}" itemValue="idCategoria" itemLabel="nomeCategoria"/>
 								</form:select>
 								</div>
 							

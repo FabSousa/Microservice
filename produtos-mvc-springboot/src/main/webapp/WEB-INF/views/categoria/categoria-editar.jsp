@@ -49,7 +49,7 @@
 						
 						<h2 class="fonte-titulo texto-cor-especial">categoria</h2>
 						
-						<form:form modelAttribute="categoriaModel" action="${contextPath}/categorias/${categoriaModel.id}" method="put">
+						<form:form modelAttribute="categoriaModel" action="${contextPath}/categorias/${categoriaModel.idCategoria}" method="put">
 						
 							<spring:hasBindErrors name="categoriaModel">
 								<div>
@@ -58,13 +58,13 @@
 							</spring:hasBindErrors>
 							
 						    <div class="form-group">
-								<form:input type="hidden" name="id" id="id" path="id" value="${categoriaModel.id}" />
+								<form:input type="hidden" name="id" id="id" path="idCategoria" value="${categoriaModel.idCategoria}" />
 	                        </div>
 							
 							<div class="form-group">
 								<label class="control-label" for="nome">Nome:</label>
 								<form:input type="text" name="nome" id="nome" path="nome" value="${categoriaModel.nomeCategoria}" class="form-control" maxlength="50" size="50" oninvalid="this.setCustomValidity('Enter User Name Here')" oninput="setCustomValidity('')"/>
-	                       		<font color="red"><form:errors path="nome"/></font>
+	                       		<font color="red"><form:errors path="nomeCategoria"/></font>
 	                        </div>
 							
 							<a class="btn btn-secondary btn-sm" href="${contextPath}/categorias">Cancelar</a>

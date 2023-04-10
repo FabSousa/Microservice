@@ -12,9 +12,9 @@ public class CategoriaModel {
 		super();
 	}
 	
-	public CategoriaModel(Long id, String nomeCategoria) {
+	public CategoriaModel(Long idCategoria, String nomeCategoria) {
 		super();
-		this.idCategoria = id;
+		this.idCategoria = idCategoria;
 		this.nomeCategoria = nomeCategoria;
 	}
 
