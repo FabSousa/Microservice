@@ -15,9 +15,9 @@ public class CategoriaRepository {
 	@Autowired
 	public JdbcTemplate jdbcTemplate;
 	
-	private static final String GET_ALL = "SELECT * FROM TB_CATEGORIA ORDER BY ID";
+	private static final String GET_ALL = "SELECT * FROM TB_CATEGORIA ORDER BY ID_CATEGORIA";
 	private static final String GET_BY_ID = "SELECT * FROM TB_CATEGORIA WHERE ID_CATEGORIA=?";
-	private static final String SAVE ="INSERT INTO TB_CATEGORIA (NOME_CATEGORIA) VALUES (?)";
+	private static final String SAVE = "INSERT INTO TB_CATEGORIA (NOME_CATEGORIA) VALUES (?)";
 	private static final String UPDATE = "UPDATE TB_CATEGORIA SET NOME_CATEGORIA=? WHERE ID_CATEGORIA=?";
 	private static final String DELETE = "DELETE FROM TB_CATEGORIA WHERE ID_CATEGORIA=?";
 	

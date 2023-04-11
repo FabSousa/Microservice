@@ -16,65 +16,65 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.fiap.model.CategoriaModel;
-import br.com.fiap.repository.CategoriaRepository;
+import br.com.fiap.model.MarcaModel;
+import br.com.fiap.repository.MarcaRepository;
 
 @Controller
-@RequestMapping("/categorias")
-public class CategoriaController {
+@RequestMapping("/marcas")
+public class MarcaController {
 
-	private static final String CATEGORIA_FOLDER = "categoria/";
-	
+	private static final String MARCA_FOLDER = "marca/";
+
 	@Autowired
-	public CategoriaRepository repository;
-	
+	public MarcaRepository repository;
+
 	@GetMapping
 	public String findAll(Model model) {
-		model.addAttribute("categorias", repository.findAll());
-		return CATEGORIA_FOLDER+"categorias";
+		model.addAttribute("marcas", repository.findAll());
+		return MARCA_FOLDER+"marcas";
 	}
-	
+
 	@GetMapping("/form")
 	public String open(@RequestParam("page") String page, @RequestParam(required = false) Long id,
-			@ModelAttribute("categoriaModel") CategoriaModel categoriaModel, Model model) {
+			@ModelAttribute("marcaModel") MarcaModel marcaModel, Model model) {
 		if ("categoria-editar".equals(page)) 
-			model.addAttribute("categoriaModel", repository.findById(id));
+			model.addAttribute("marcaModel", repository.findById(id));
 
-		return CATEGORIA_FOLDER+page;
+		return MARCA_FOLDER+page;
 	}
-	
+
 	@GetMapping("/{id}")
 	public String findById(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("categoria", repository.findById(id));
-		return CATEGORIA_FOLDER+"categoria-detalhe";
+		model.addAttribute("marca", repository.findById(id));
+		return MARCA_FOLDER+"marca-detalhe";
 	}
-	
+
 	@PostMapping
-	public String save(@Valid CategoriaModel categoriaModel, BindingResult bindingResult,
+	public String save(@Valid MarcaModel marcaModel, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) 
-			return CATEGORIA_FOLDER+"categoria-novo";
+			return MARCA_FOLDER+"marca-novo";
 
-		repository.save(categoriaModel);
-		redirectAttributes.addFlashAttribute("messages", "Categoria cadastrada com sucesso!");
-		return "redirect:/categorias";
+		repository.save(marcaModel);
+		redirectAttributes.addFlashAttribute("messages", "Marca cadastrada com sucesso!");
+		return "redirect:/marcas";
 	}
 
 	@PutMapping("/{id}")
-	public String update(@PathVariable("id") Long id, @Valid CategoriaModel categoriaModel, Model model,
+	public String update(@PathVariable("id") Long id, @Valid MarcaModel marcaModel, Model model,
 			RedirectAttributes redirectAttributes) {
-		categoriaModel.setIdCategoria(id);
-		repository.update(categoriaModel);
-		redirectAttributes.addFlashAttribute("messages", "Categoria atualizada com sucesso!");
-		model.addAttribute("categorias", repository.findAll());
-		return "redirect:/categorias";
+		marcaModel.setIdMarca(id);
+		repository.update(marcaModel);
+		redirectAttributes.addFlashAttribute("messages", "Marca atualizada com sucesso!");
+		model.addAttribute("marcas", repository.findAll());
+		return "redirect:/marcas";
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public String delete(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
 		repository.deleteById(id);
-		redirectAttributes.addFlashAttribute("messages", "Categoria excluída com sucesso!");
-		model.addAttribute("categorias", repository.findAll());
-		return "redirect:/categorias";
+		redirectAttributes.addFlashAttribute("messages", "Marca excluída com sucesso!");
+		model.addAttribute("marcas", repository.findAll());
+		return "redirect:/marcas";
 	}
 }

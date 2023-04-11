@@ -9,7 +9,7 @@
 
 <head>
 <meta charset="ISO-8859-1">
-<title>categorias</title>
+<title>Marcas</title>
 
 <!-- ATALHO PARA TRAZER A URL DE CONTEXTO DO PROJETO -->
 <c:set value="${pageContext.request.contextPath}" var="contextPath" />
@@ -37,8 +37,7 @@
 	<header>
 		<nav class="navbar navbar-dark bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand fonte-titulo"
-					href="${contextPath}/categorias">Categorias</a>
+				<a class="navbar-brand fonte-titulo" href="${contextPath}/marcas">Marcas</a>
 			</div>
 		</nav>
 	</header>
@@ -51,33 +50,31 @@
 				<div class="col-lg-12">
 					<div class="well">
 
-						<h2 class="fonte-titulo texto-cor-especial">categoria</h2>
+						<h2 class="fonte-titulo texto-cor-especial">Marca</h2>
 
-						<form:form modelAttribute="categoriaModel"
-							action="${contextPath}/categorias/${categoriaModel.idCategoria}"
-							method="put">
+						<form:form modelAttribute="marcaModel"
+							action="${contextPath}/marcas/${marcaModel.idMarca}" method="put">
 
-							<spring:hasBindErrors name="categoriaModel">
+							<spring:hasBindErrors name="marcaModel">
 								<div>
 									<form:errors path="*" class="has-error"></form:errors>
 								</div>
 							</spring:hasBindErrors>
 
 							<div class="form-group">
-								<form:input type="hidden" name="id" id="id" path="idCategoria"
-									value="${categoriaModel.idCategoria}" />
+								<form:input type="hidden" name="id" id="id" path="idMarca"
+									value="${marcaModel.idMarca}" />
 							</div>
 
 							<div class="form-group">
 								<label class="control-label" for="nome">Nome:</label>
-								<form:input type="text" name="nome" id="nome"
-									path="nomeCategoria" value="${categoriaModel.nomeCategoria}"
-									class="form-control" maxlength="50" size="50" />
-								<font color="red"><form:errors path="nomeCategoria" /></font>
+								<form:input type="text" name="nome" id="nome" path="nomeMarca"
+									value="${marcaModel.nomeMarca}" class="form-control"
+									maxlength="50" size="50" />
+								<font color="red"><form:errors path="nomeMarca" /></font>
 							</div>
 
-							<a class="btn btn-secondary btn-sm"
-								href="${contextPath}/categorias">Cancelar</a>
+							<a class="btn btn-secondary btn-sm" href="${contextPath}/marcas">Cancelar</a>
 							<form:button type="submit" class="btn btn-primary btn-sm">Gravar</form:button>
 						</form:form>
 					</div>
