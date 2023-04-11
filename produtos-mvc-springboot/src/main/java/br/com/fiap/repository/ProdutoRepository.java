@@ -62,7 +62,7 @@ public class ProdutoRepository {
 				produto.getCategoria().getIdCategoria());
 	}
 
-	public void deleteById(long id) {
-		this.jdbcTemplate.update(DELETE,id);
+	public void deleteById(Long id) {
+		this.jdbcTemplate.update(DELETE, id);
 	}
 }

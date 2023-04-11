@@ -63,13 +63,13 @@
 
 								<div class="form-group">
 									<label class="control-label" for="nome">Nome:</label>
-									<form:input type="text" path="nome" name="nome" id="nome"
-										value="" class="form-control" maxlength="50" size="50" />
+									<form:input type="text" name="nome" id="nome" path="nome"
+										class="form-control" maxlength="50" size="50" />
 									<font color="red"><form:errors path="nome" /></font><br />
 								</div>
 								<div class="form-group">
 									<label class="control-label" for="sku">SKU:</label>
-									<form:input type="text" path="sku" name="sku" id="sku"
+									<form:input type="text" name="sku" id="sku" path="sku"
 										class="form-control" maxlength="50" size="50" />
 									<font color="red"><form:errors path="sku" /></font><br />
 								</div>
@@ -84,22 +84,22 @@
 
 								<div class="form-group">
 									<label class="control-label" for="descricao">Descrição:</label>
-									<form:textarea class="form-control" path="descricao"
-										name="descricao" id="descricao" rows="4" cols="100" />
+									<form:textarea name="descricao" id="descricao" path="descricao"
+										class="form-control" rows="4" cols="100" />
 									<font color="red"><form:errors path="descricao" /></font><br />
 								</div>
 
 								<div class="form-group">
 									<label class="control-label" for="preco">Preço:</label>
-									<form:input type="number" id="preco" path="preco" name="preco"
+									<form:input type="number" name="preco" id="preco" path="preco"
 										step=".01" class="form-control" />
 									<font color="red"><form:errors path="preco" /></font><br />
 								</div>
 
 								<div class="form-group">
 									<label class="control-label" for="caracteristicas">Características:</label>
-									<form:textarea id="caracteristicas" class="form-control"
-										path="caracteristicas" name="caracteristicas" rows="4"
+									<form:textarea name="caracteristicas" id="caracteristicas"
+										path="caracteristicas" class="form-control" rows="4"
 										cols="100" />
 									<font color="red"><form:errors path="caracteristicas" /></font><br />
 								</div>

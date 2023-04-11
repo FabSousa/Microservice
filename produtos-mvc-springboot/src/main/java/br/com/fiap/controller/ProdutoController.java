@@ -40,9 +40,8 @@ public class ProdutoController {
 	public String open(@RequestParam("page") String page, @RequestParam(required = false) Long id,
 			@ModelAttribute("produtoModel") ProdutoModel produtoModel, Model model) {
 
-		if ("produto-editar".equals(page)) {
+		if ("produto-editar".equals(page))
 			model.addAttribute("produtoModel", repository.findById(id));
-		}
 		
 		model.addAttribute("categorias", categoriaRepository.findAll());
 
@@ -58,9 +57,8 @@ public class ProdutoController {
 	@PostMapping
 	public String save(@Valid ProdutoModel produto, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) 
 			return PRODUTO_FOLDER+"produto-novo";
-		}
 
 		repository.save(produto);
 		redirectAttributes.addFlashAttribute("messages", "Produto cadastrado com sucesso!");
@@ -70,13 +68,11 @@ public class ProdutoController {
 	@PostMapping("/{id}")
 	public String update(@PathVariable("id") long id, Model model, @Valid ProdutoModel produtoModel,
 			RedirectAttributes redirectAttributes) {
-
 		produtoModel.setId(id);
 		repository.update(produtoModel);
 		redirectAttributes.addFlashAttribute("messages", "Produto atualizado com sucesso!");
 		model.addAttribute("produtos", repository.findAll());
 		return "redirect:/produtos";
-
 	}
 
 	@DeleteMapping("/{id}")

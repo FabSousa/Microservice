@@ -5,11 +5,11 @@ import jakarta.validation.constraints.Size;
 
 public class ProdutoModel {
 
-	private long id;
+	private Long id;
 	private String nome;
 	private String sku;
 	private String descricao;
-	private double preco;
+	private Double preco;
 	private String caracteristicas;
 	private CategoriaModel categoria;
 
@@ -17,7 +17,7 @@ public class ProdutoModel {
 		super();
 	}
 
-	public ProdutoModel(long id, String nome, String sku, String descricao, double preco, String caracteristicas,
+	public ProdutoModel(Long id, String nome, String sku, String descricao, Double preco, String caracteristicas,
 			CategoriaModel categoria) {
 		super();
 		this.id = id;
@@ -29,10 +29,11 @@ public class ProdutoModel {
 		this.categoria = categoria;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -40,6 +41,7 @@ public class ProdutoModel {
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -48,6 +50,7 @@ public class ProdutoModel {
 	public String getSku() {
 		return sku;
 	}
+	
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
@@ -56,15 +59,17 @@ public class ProdutoModel {
 	public String getDescricao() {
 		return descricao;
 	}
+	
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
 	@DecimalMin(value="0.1", message = "Preço deve ser acima de 0.0")
-	public double getPreco() {
+	public Double getPreco() {
 		return preco;
 	}
-	public void setPreco(double preco) {
+	
+	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
 
@@ -72,6 +77,7 @@ public class ProdutoModel {
 	public String getCaracteristicas() {
 		return caracteristicas;
 	}
+	
 	public void setCaracteristicas(String caracteristicas) {
 		this.caracteristicas = caracteristicas;
 	}
@@ -83,6 +89,5 @@ public class ProdutoModel {
 	public void setCategoria(CategoriaModel categoria) {
 		this.categoria = categoria;
 	}
-
 
 }

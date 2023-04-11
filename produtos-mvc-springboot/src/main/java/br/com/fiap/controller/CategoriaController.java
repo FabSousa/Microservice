@@ -37,10 +37,8 @@ public class CategoriaController {
 	@GetMapping("/form")
 	public String open(@RequestParam("page") String page, @RequestParam(required = false) Long id,
 			@ModelAttribute("categoriaModel") CategoriaModel categoriaModel, Model model) {
-
-		if ("categoria-editar".equals(page)) {
+		if ("categoria-editar".equals(page)) 
 			model.addAttribute("categoriaModel", repository.findById(id));
-		}
 
 		return CATEGORIA_FOLDER+page;
 	}
@@ -54,9 +52,8 @@ public class CategoriaController {
 	@PostMapping
 	public String save(@Valid CategoriaModel categoria, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) 
 			return CATEGORIA_FOLDER+"categoria-novo";
-		}
 
 		repository.save(categoria);
 		redirectAttributes.addFlashAttribute("messages", "Categoria cadastrada com sucesso!");
@@ -66,7 +63,6 @@ public class CategoriaController {
 	@PutMapping("/{id}")
 	public String update(@PathVariable("id") long id, Model model, @Valid CategoriaModel categoriaModel,
 			RedirectAttributes redirectAttributes) {
-
 		categoriaModel.setIdCategoria(id);
 		repository.update(categoriaModel);
 		redirectAttributes.addFlashAttribute("messages", "Categoria atualizada com sucesso!");
