@@ -48,8 +48,8 @@ public class ProdutoRepository {
 				produtoModel.getDescricao(),
 				produtoModel.getCaracteristicas(),
 				produtoModel.getPreco(),
-				produtoModel.getId(),
-				produtoModel.getCategoria().getIdCategoria());
+				produtoModel.getCategoria().getIdCategoria(),
+				produtoModel.getId());
 	}
 
 	public void save(ProdutoModel produto) {

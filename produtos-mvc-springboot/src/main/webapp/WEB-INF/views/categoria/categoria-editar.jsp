@@ -63,7 +63,7 @@
 							
 							<div class="form-group">
 								<label class="control-label" for="nome">Nome:</label>
-								<form:input type="text" name="nome" id="nome" path="nome" value="${categoriaModel.nomeCategoria}" class="form-control" maxlength="50" size="50" oninvalid="this.setCustomValidity('Enter User Name Here')" oninput="setCustomValidity('')"/>
+								<form:input type="text" name="nome" id="nome" path="nomeCategoria" value="${categoriaModel.nomeCategoria}" class="form-control" maxlength="50" size="50" oninvalid="this.setCustomValidity('Enter User Name Here')" oninput="setCustomValidity('')"/>
 	                       		<font color="red"><form:errors path="nomeCategoria"/></font>
 	                        </div>
 							
