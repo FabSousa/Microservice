@@ -67,6 +67,11 @@
 							</div>
 							<div class="form-group">
 								<p class="fs-6 m-0">
+									<b>Marca:</b> ${produto.marca.nomeMarca}
+								</p>
+							</div>
+							<div class="form-group">
+								<p class="fs-6 m-0">
 									<b>Descrição:</b> ${produto.descricao}
 								</p>
 							</div>

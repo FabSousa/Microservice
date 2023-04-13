@@ -53,7 +53,7 @@
 						<h2 class="fonte-titulo texto-cor-especial">Produto</h2>
 
 						<form:form modelAttribute="produtoModel"
-							action="${contextPath}/produtos/${produtoModel.id}" method="post">
+							action="${contextPath}/produtos/${produtoModel.id}" method="put">
 
 							<spring:hasBindErrors name="produtoModel">
 								<div>
@@ -87,6 +87,14 @@
 								<form:select path="categoria.idCategoria">
 									<form:options items="${categorias}" itemValue="idCategoria"
 										itemLabel="nomeCategoria" />
+								</form:select>
+							</div>
+							
+							<div class="form-group">
+								<label class="control-label" for="marca">Marcas:</label>
+								<form:select path="marca.idMarca">
+									<form:options items="${marcas}" itemValue="idMarca"
+										itemLabel="nomeMarca" />
 								</form:select>
 							</div>
 

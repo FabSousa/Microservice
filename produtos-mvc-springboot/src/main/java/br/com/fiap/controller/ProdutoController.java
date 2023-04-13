@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fiap.model.ProdutoModel;
 import br.com.fiap.repository.CategoriaRepository;
+import br.com.fiap.repository.MarcaRepository;
 import br.com.fiap.repository.ProdutoRepository;
 
 @Controller
@@ -27,6 +29,8 @@ public class ProdutoController {
 	ProdutoRepository repository;
 	@Autowired
 	CategoriaRepository categoriaRepository;
+	@Autowired
+	MarcaRepository marcaRepository;
 	
 	private static final String PRODUTO_FOLDER = "produto/";
 
@@ -44,6 +48,8 @@ public class ProdutoController {
 			model.addAttribute("produtoModel", repository.findById(id));
 		
 		model.addAttribute("categorias", categoriaRepository.findAll());
+		
+		model.addAttribute("marcas", marcaRepository.findAll());
 
 		return PRODUTO_FOLDER+page;
 	}
@@ -65,7 +71,7 @@ public class ProdutoController {
 		return "redirect:/produtos";
 	}
 	
-	@PostMapping("/{id}")
+	@PutMapping("/{id}")
 	public String update(@PathVariable("id") long id, Model model, @Valid ProdutoModel produtoModel,
 			RedirectAttributes redirectAttributes) {
 		produtoModel.setId(id);

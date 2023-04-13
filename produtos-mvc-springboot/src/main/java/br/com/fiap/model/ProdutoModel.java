@@ -12,6 +12,7 @@ public class ProdutoModel {
 	private Double preco;
 	private String caracteristicas;
 	private CategoriaModel categoria;
+	private MarcaModel marca;
 
 	public ProdutoModel() {
 		super();
@@ -88,6 +89,14 @@ public class ProdutoModel {
 
 	public void setCategoria(CategoriaModel categoria) {
 		this.categoria = categoria;
+	}
+
+	public MarcaModel getMarca() {
+		return marca;
+	}
+
+	public void setMarca(MarcaModel marca) {
+		this.marca = marca;
 	}
 
 }

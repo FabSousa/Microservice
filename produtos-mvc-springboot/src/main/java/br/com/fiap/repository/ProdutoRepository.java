@@ -14,22 +14,29 @@ public class ProdutoRepository {
 
 	@Autowired
 	public JdbcTemplate jdbcTemplate;
-	
-	private static final String GET_ALL = "SELECT * FROM TB_PRODUTO P INNER JOIN TB_CATEGORIA C"
+
+	private static final String GET_ALL = "SELECT * FROM TB_PRODUTO P"
+										+ " INNER JOIN TB_CATEGORIA C"
 										+ " ON P.ID_CATEGORIA = C.ID_CATEGORIA"
-										+ " ORDER BY P.ID";
-	
-	private static final String GET_BY_ID = "SELECT * FROM TB_PRODUTO P INNER JOIN TB_CATEGORIA C"
-											+ " ON P.ID_CATEGORIA = C.ID_CATEGORIA"
-											+ " WHERE P.ID=?";
-	
-	private static final String SAVE = "INSERT INTO TB_PRODUTO (NOME, SKU, DESCRICAO, CARACTERISTICAS, PRECO, ID_CATEGORIA) "
-										+ "VALUES (?, ?, ?, ?, ?, ?)";
-	
+										+ " INNER JOIN TB_MARCA M"
+										+ " ON P.ID_MARCA = M.ID_MARCA"
+										+ " ORDER BY ID";
+
+	private static final String GET_BY_ID = "SELECT * FROM TB_PRODUTO P"
+										+ " INNER JOIN TB_CATEGORIA C"
+										+ " ON P.ID_CATEGORIA = C.ID_CATEGORIA"
+										+ " INNER JOIN TB_MARCA M"
+										+ " ON P.ID_MARCA = M.ID_MARCA"
+										+ " WHERE P.ID=?";
+
+	private static final String SAVE = "INSERT INTO TB_PRODUTO"
+									+ " (NOME, SKU, DESCRICAO, CARACTERISTICAS, PRECO, ID_CATEGORIA, ID_MARCA) "
+									+ " VALUES (?, ?, ?, ?, ?, ?, ?)";
+
 	private static final String UPDATE = "UPDATE TB_PRODUTO SET"
-										+ " NOME=?, SKU=?, DESCRICAO=?, CARACTERISTICAS=?, PRECO=?, ID_CATEGORIA=?"
+										+ " NOME=?, SKU=?, DESCRICAO=?, CARACTERISTICAS=?, PRECO=?, ID_CATEGORIA=?, ID_MARCA=?"
 										+ " WHERE ID=?";
-	
+
 	private static final String DELETE = "DELETE FROM TB_PRODUTO WHERE ID=?";
 
 
@@ -49,17 +56,19 @@ public class ProdutoRepository {
 				produtoModel.getCaracteristicas(),
 				produtoModel.getPreco(),
 				produtoModel.getCategoria().getIdCategoria(),
+				produtoModel.getMarca().getIdMarca(),
 				produtoModel.getId());
 	}
 
-	public void save(ProdutoModel produto) {
+	public void save(ProdutoModel produtoModel) {
 		this.jdbcTemplate.update(SAVE, 
-				produto.getNome(),
-				produto.getSku(),
-				produto.getDescricao(),
-				produto.getCaracteristicas(),
-				produto.getPreco(),
-				produto.getCategoria().getIdCategoria());
+				produtoModel.getNome(),
+				produtoModel.getSku(),
+				produtoModel.getDescricao(),
+				produtoModel.getCaracteristicas(),
+				produtoModel.getPreco(),
+				produtoModel.getCategoria().getIdCategoria(),
+				produtoModel.getMarca().getIdMarca());
 	}
 
 	public void deleteById(Long id) {

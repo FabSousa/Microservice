@@ -37,7 +37,7 @@ public class MarcaController {
 	@GetMapping("/form")
 	public String open(@RequestParam("page") String page, @RequestParam(required = false) Long id,
 			@ModelAttribute("marcaModel") MarcaModel marcaModel, Model model) {
-		if ("categoria-editar".equals(page)) 
+		if ("marca-editar".equals(page)) 
 			model.addAttribute("marcaModel", repository.findById(id));
 
 		return MARCA_FOLDER+page;

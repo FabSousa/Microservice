@@ -83,6 +83,14 @@
 								</div>
 
 								<div class="form-group">
+									<label class="control-label" for="marca">Marcas:</label>
+									<form:select path="marca.idMarca">
+										<form:options items="${marcas}" itemValue="idMarca"
+											itemLabel="nomeMarca" />
+									</form:select>
+								</div>
+
+								<div class="form-group">
 									<label class="control-label" for="descricao">Descrição:</label>
 									<form:textarea name="descricao" id="descricao" path="descricao"
 										class="form-control" rows="4" cols="100" />

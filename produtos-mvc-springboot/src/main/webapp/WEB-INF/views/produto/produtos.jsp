@@ -60,6 +60,7 @@
 					<tr>
 						<th scope="col">Nome</th>
 						<th scope="col">Categoria</th>
+						<th scope="col">Marcas</th>
 						<th scope="col">Preço</th>
 						<th scope="col">Ações</th>
 					</tr>
@@ -69,6 +70,7 @@
 						<tr>
 							<td>${produto.nome}</td>
 							<td>${produto.categoria.nomeCategoria}</td>
+							<td>${produto.marca.nomeMarca}</td>
 							<td>${produto.preco}</td>
 							<td><form:form
 									action="${contextPath}/produtos/${produto.id}" method="delete">
