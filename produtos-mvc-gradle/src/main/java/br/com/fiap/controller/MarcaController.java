@@ -38,14 +38,14 @@ public class MarcaController {
 	public String open(@RequestParam("page") String page, @RequestParam(required = false) Long id,
 			@ModelAttribute("marcaModel") MarcaModel marcaModel, Model model) {
 		if ("marca-editar".equals(page)) 
-			model.addAttribute("marcaModel", repository.findById(id));
+			model.addAttribute("marcaModel", repository.findById(id).get());
 
 		return MARCA_FOLDER+page;
 	}
 
 	@GetMapping("/{id}")
 	public String findById(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("marca", repository.findById(id));
+		model.addAttribute("marca", repository.findById(id).get());
 		return MARCA_FOLDER+"marca-detalhe";
 	}
 
@@ -64,7 +64,7 @@ public class MarcaController {
 	public String update(@PathVariable("id") Long id, @Valid MarcaModel marcaModel, Model model,
 			RedirectAttributes redirectAttributes) {
 		marcaModel.setIdMarca(id);
-		repository.update(marcaModel);
+		repository.save(marcaModel);
 		redirectAttributes.addFlashAttribute("messages", "Marca atualizada com sucesso!");
 		model.addAttribute("marcas", repository.findAll());
 		return "redirect:/marcas";

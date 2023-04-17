@@ -45,7 +45,7 @@ public class ProdutoController {
 			@ModelAttribute("produtoModel") ProdutoModel produtoModel, Model model) {
 
 		if ("produto-editar".equals(page))
-			model.addAttribute("produtoModel", repository.findById(id));
+			model.addAttribute("produtoModel", repository.findById(id).get());
 		
 		model.addAttribute("categorias", categoriaRepository.findAll());
 		
@@ -56,7 +56,7 @@ public class ProdutoController {
 
 	@GetMapping("/{id}")
 	public String findById(@PathVariable("id") long id, Model model) {
-		model.addAttribute("produto", repository.findById(id));
+		model.addAttribute("produto", repository.findById(id).get());
 		return PRODUTO_FOLDER+"produto-detalhe";
 	}
 
@@ -75,7 +75,7 @@ public class ProdutoController {
 	public String update(@PathVariable("id") long id, Model model, @Valid ProdutoModel produtoModel,
 			RedirectAttributes redirectAttributes) {
 		produtoModel.setId(id);
-		repository.update(produtoModel);
+		repository.save(produtoModel);
 		redirectAttributes.addFlashAttribute("messages", "Produto atualizado com sucesso!");
 		model.addAttribute("produtos", repository.findAll());
 		return "redirect:/produtos";

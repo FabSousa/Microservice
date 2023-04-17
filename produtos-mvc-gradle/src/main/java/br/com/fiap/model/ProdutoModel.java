@@ -1,24 +1,42 @@
 package br.com.fiap.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Size;
 
+@Entity
+@Table(name = "TB_PRODUTO")
 public class ProdutoModel {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String nome;
 	private String sku;
 	private String descricao;
-	private Double preco;
+	private Float preco;
 	private String caracteristicas;
+	
+	@ManyToOne
+	@JoinColumn(name = "ID_CATEGORIA", nullable = false)
 	private CategoriaModel categoria;
+	
+	@ManyToOne
+	@JoinColumn(name = "ID_MARCA", nullable = false)
 	private MarcaModel marca;
 
 	public ProdutoModel() {
 		super();
 	}
 
-	public ProdutoModel(Long id, String nome, String sku, String descricao, Double preco, String caracteristicas,
+	public ProdutoModel(Long id, String nome, String sku, String descricao, Float preco, String caracteristicas,
 			CategoriaModel categoria) {
 		super();
 		this.id = id;
@@ -66,11 +84,11 @@ public class ProdutoModel {
 	}
 
 	@DecimalMin(value="0.1", message = "Preço deve ser acima de 0.0")
-	public Double getPreco() {
+	public Float getPreco() {
 		return preco;
 	}
 	
-	public void setPreco(Double preco) {
+	public void setPreco(Float preco) {
 		this.preco = preco;
 	}
 

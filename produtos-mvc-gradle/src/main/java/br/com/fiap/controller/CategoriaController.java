@@ -38,14 +38,14 @@ public class CategoriaController {
 	public String open(@RequestParam("page") String page, @RequestParam(required = false) Long id,
 			@ModelAttribute("categoriaModel") CategoriaModel categoriaModel, Model model) {
 		if ("categoria-editar".equals(page)) 
-			model.addAttribute("categoriaModel", repository.findById(id));
+			model.addAttribute("categoriaModel", repository.findById(id).get());
 
 		return CATEGORIA_FOLDER+page;
 	}
 	
 	@GetMapping("/{id}")
 	public String findById(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("categoria", repository.findById(id));
+		model.addAttribute("categoria", repository.findById(id).get());
 		return CATEGORIA_FOLDER+"categoria-detalhe";
 	}
 	
@@ -64,7 +64,7 @@ public class CategoriaController {
 	public String update(@PathVariable("id") Long id, @Valid CategoriaModel categoriaModel, Model model,
 			RedirectAttributes redirectAttributes) {
 		categoriaModel.setIdCategoria(id);
-		repository.update(categoriaModel);
+		repository.save(categoriaModel);
 		redirectAttributes.addFlashAttribute("messages", "Categoria atualizada com sucesso!");
 		model.addAttribute("categorias", repository.findAll());
 		return "redirect:/categorias";
