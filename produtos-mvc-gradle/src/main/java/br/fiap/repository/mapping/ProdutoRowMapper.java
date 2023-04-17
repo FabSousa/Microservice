@@ -1,4 +1,4 @@
-package br.com.fiap.repository.map;
+package br.fiap.repository.mapping;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,17 +14,15 @@ public class ProdutoRowMapper implements RowMapper<ProdutoModel> {
 
 	@Override
 	public ProdutoModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-		
+
 		ProdutoModel produtoModel = new BeanPropertyRowMapper<>(ProdutoModel.class).mapRow(rs, rowNum);
-		CategoriaModel categoria = new BeanPropertyRowMapper<>(CategoriaModel.class).mapRow(rs, rowNum);
-		MarcaModel marca = new BeanPropertyRowMapper<>(MarcaModel.class).mapRow(rs, rowNum);
+		CategoriaModel categoriaoModel = new BeanPropertyRowMapper<>(CategoriaModel.class).mapRow(rs, rowNum);
+		MarcaModel marcaModel = new BeanPropertyRowMapper<>(MarcaModel.class).mapRow(rs, rowNum);
 		
-		produtoModel.setCategoria(categoria);
-		produtoModel.setMarca(marca);
+		produtoModel.setCategoria(categoriaoModel);
+		produtoModel.setMarca(marcaModel);
 		
 		return produtoModel;
 	}
-	
-	
 
 }

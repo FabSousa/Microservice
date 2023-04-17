@@ -8,45 +8,39 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import br.com.fiap.model.CategoriaModel;
-import jakarta.validation.Valid;
 
 @Repository
 public class CategoriaRepository {
-	
-	private static final String GET_ALL = "SELECT * FROM TB_CATEGORIA";
-	private static final String GET = "SELECT * FROM TB_CATEGORIA WHERE ID_CATEGORIA = ?";
-	private static final String SAVE = "INSERT INTO TB_CATEGORIA (NOME_CATEGORIA) VALUES (?)";
-	private static final String UPDATE = "UPDATE TB_CATEGORIA SET NOME_CATEGORIA = ? WHERE ID_CATEGORIA =?";
-	private static final String DELETE = "DELETE FROM TB_CATEGORIA WHERE ID_CATEGORIA = ?";
-	
+
 	@Autowired
 	public JdbcTemplate jdbcTemplate;
 	
+	private static final String GET_ALL = "SELECT * FROM TB_CATEGORIA ORDER BY ID_CATEGORIA";
+	private static final String GET_BY_ID = "SELECT * FROM TB_CATEGORIA WHERE ID_CATEGORIA=?";
+	private static final String SAVE = "INSERT INTO TB_CATEGORIA (NOME_CATEGORIA) VALUES (?)";
+	private static final String UPDATE = "UPDATE TB_CATEGORIA SET NOME_CATEGORIA=? WHERE ID_CATEGORIA=?";
+	private static final String DELETE = "DELETE FROM TB_CATEGORIA WHERE ID_CATEGORIA=?";
+	
 	public List<CategoriaModel> findAll() {
-		List<CategoriaModel> categorias = this.jdbcTemplate.query(GET_ALL, 
-				new BeanPropertyRowMapper<CategoriaModel>(CategoriaModel.class));
-		
-		return categorias;
-		
+		return this.jdbcTemplate.query(GET_ALL, new BeanPropertyRowMapper<CategoriaModel>(CategoriaModel.class));
 	}
 	
-	public CategoriaModel findById(long id) {
-		CategoriaModel categoria = this.jdbcTemplate.queryForObject(GET, 
-				new BeanPropertyRowMapper<CategoriaModel>(CategoriaModel.class), id);
-		return categoria;
+	public CategoriaModel findById(Long id) {
+		 return jdbcTemplate.queryForObject(GET_BY_ID, new BeanPropertyRowMapper<CategoriaModel>(CategoriaModel.class), id);
+	}
+
+	public void save(CategoriaModel categoria) {
+		this.jdbcTemplate.update(SAVE, 
+				categoria.getNomeCategoria());
 	}
 	
-	public void save(@Valid CategoriaModel categoria) {
-		this.jdbcTemplate.update(SAVE, categoria.getNomeCategoria());
+	public void update(CategoriaModel categoriaModel) {
+		this.jdbcTemplate.update(UPDATE, 
+				categoriaModel.getNomeCategoria(),
+				categoriaModel.getIdCategoria());
 	}
 	
-	public void update(@Valid CategoriaModel categoria) {
-		this.jdbcTemplate.update(UPDATE, categoria.getNomeCategoria(), categoria.getIdCategoria());
-	}
-	public void deleteById(long id) {
+	public void deleteById(Long id) {
 		this.jdbcTemplate.update(DELETE, id);
 	}
-	
-	
-
 }
