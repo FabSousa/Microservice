@@ -35,14 +35,9 @@
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-dark bg-dark">
-			<div class="container-fluid">
-				<a class="navbar-brand fonte-titulo"
-					href="${contextPath}/categorias">Categorias</a>
-			</div>
-		</nav>
+		<%@ include file="../navbar/navbar.html"%>
 	</header>
-
+	
 	<main class="container">
 
 		<section id="formulario">
