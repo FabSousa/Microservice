@@ -1,10 +1,15 @@
 package br.com.fiap.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
@@ -24,20 +29,26 @@ public class ProdutoModel {
 	private Float preco;
 	private String caracteristicas;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_CATEGORIA", nullable = false)
 	private CategoriaModel categoria;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_MARCA", nullable = false)
 	private MarcaModel marca;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "TB_PRODUTO_LOJA", 
+	joinColumns = @JoinColumn(name = "ID", 	referencedColumnName = "ID"),
+	inverseJoinColumns = @JoinColumn(name = "ID_LOJA", referencedColumnName = "ID_LOJA"))
+	private List<LojaModel> lojas;
 
 	public ProdutoModel() {
 		super();
 	}
 
 	public ProdutoModel(Long id, String nome, String sku, String descricao, Float preco, String caracteristicas,
-			CategoriaModel categoria) {
+			CategoriaModel categoria, List<LojaModel> lojas) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -46,6 +57,7 @@ public class ProdutoModel {
 		this.preco = preco;
 		this.caracteristicas = caracteristicas;
 		this.categoria = categoria;
+		this.lojas = lojas;
 	}
 
 	public Long getId() {
@@ -115,6 +127,14 @@ public class ProdutoModel {
 
 	public void setMarca(MarcaModel marca) {
 		this.marca = marca;
+	}
+
+	public List<LojaModel> getLojas() {
+		return lojas;
+	}
+
+	public void setLojas(List<LojaModel> lojas) {
+		this.lojas = lojas;
 	}
 
 }
