@@ -9,7 +9,7 @@
 
 <head>
 <meta charset="ISO-8859-1">
-<title>categorias</title>
+<title>Lojas</title>
 
 <!-- ATALHO PARA TRAZER A URL DE CONTEXTO DO PROJETO -->
 <c:set value="${pageContext.request.contextPath}" var="contextPath" />
@@ -46,33 +46,33 @@
 				<div class="col-lg-12">
 					<div class="well">
 
-						<h2 class="fonte-titulo texto-cor-especial">Categoria</h2>
+						<h2 class="fonte-titulo texto-cor-especial">Loja</h2>
 
-						<form:form modelAttribute="categoriaModel"
-							action="${contextPath}/categorias/${categoriaModel.idCategoria}"
+						<form:form modelAttribute="lojaModel"
+							action="${contextPath}/lojas/${lojaModel.idLoja}"
 							method="put">
 
-							<spring:hasBindErrors name="categoriaModel">
+							<spring:hasBindErrors name="lojaModel">
 								<div>
 									<form:errors path="*" class="has-error"></form:errors>
 								</div>
 							</spring:hasBindErrors>
 
 							<div class="form-group">
-								<form:input type="hidden" name="id" id="id" path="idCategoria"
-									value="${categoriaModel.idCategoria}" />
+								<form:input type="hidden" name="id" id="id" path="idLoja"
+									value="${lojaModel.idLoja}" />
 							</div>
 
 							<div class="form-group">
 								<label class="control-label" for="nome">Nome:</label>
 								<form:input type="text" name="nome" id="nome"
-									path="nomeCategoria" value="${categoriaModel.nomeCategoria}"
+									path="nomeLoja" value="${lojaModel.nomeLoja}"
 									class="form-control" maxlength="50" size="50" />
-								<font color="red"><form:errors path="nomeCategoria" /></font>
+								<font color="red"><form:errors path="nomeLoja" /></font>
 							</div>
 
 							<a class="btn btn-secondary btn-sm"
-								href="${contextPath}/categorias">Cancelar</a>
+								href="${contextPath}/lojas">Cancelar</a>
 							<form:button type="submit" class="btn btn-primary btn-sm">Gravar</form:button>
 						</form:form>
 					</div>

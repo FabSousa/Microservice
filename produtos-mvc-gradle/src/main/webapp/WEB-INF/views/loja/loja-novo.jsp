@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!-- TAGS NECESSARIAS PARA UTLIZARMOS O JSTL E OS RECURSOS DO SPRING -->
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="ISO-8859-1">
-<title>categorias</title>
+<title>Lojas</title>
 
 <!-- ATALHO PARA TRAZER A URL DE CONTEXTO DO PROJETO -->
 <c:set value="${pageContext.request.contextPath}" var="contextPath" />
@@ -39,32 +40,45 @@
 	</header>
 
 	<main>
-
-		<section id="detalhes" class="bg-light pb-5">
+		<section id="formulario" class="bg-light pb-5">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-						<form>
-							<h2 class="fonte-titulo texto-cor-especial">Categoria</h2>
-							<div class="form-group">
-								<p class="fs-6 m-0">
-									<b>Nome:</b> ${categoria.nomeCategoria}
-								</p>
-							</div>
-							<hr>
-							<div class="d-grid gap-2 col-6">
-								<a class="btn btn-primary btn-sm"
-									href="${contextPath}/categorias">Voltar</a>
-							</div>
-						</form>
+						<div class="well">
+
+							<h2 class="fonte-titulo texto-cor-especial">Loja</h2>
+
+							<form:form modelAttribute="lojaModel"
+								action="${contextPath}/lojas" method="post">
+
+								<spring:hasBindErrors name="lojaModel">
+									<div class="alert alert-danger" role="alert">
+										<form:errors path="*" class="has-error" />
+									</div>
+								</spring:hasBindErrors>
+
+								<div class="form-group">
+									<label class="control-label" for="nome">Nome:</label>
+									<form:input type="text" name="nome" id="nome"
+										path="nomeLoja" class="form-control" maxlength="50"
+										size="50" />
+									<font color="red"><form:errors path="nomeLoja" /></font><br />
+								</div>
+
+
+								<a class="btn btn-secondary btn-sm"
+									href="${contextPath}/lojas">Cancelar</a>
+								<button type="submit" class="btn btn-primary btn-sm">Gravar</button>
+							</form:form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 	</main>
 
-	<!-- APONTAMENTO PARA AS BIBLIOTECAS E JAVASCRIPT DO JQUERY E BOOTSTRAP -->
 	<script src="${jquery}/jquery.min.js"></script>
 	<script src="${js}/bootstrap.min.js"></script>
+
 </body>
 </html>

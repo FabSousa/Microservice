@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>categorias</title>
+<title>Lojas</title>
 
 <!-- ATALHO PARA TRAZER A URL DE CONTEXTO DO PROJETO -->
 <c:set value="${pageContext.request.contextPath}" var="contextPath" />
@@ -45,16 +45,16 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<form>
-							<h2 class="fonte-titulo texto-cor-especial">Categoria</h2>
+							<h2 class="fonte-titulo texto-cor-especial">Lojas</h2>
 							<div class="form-group">
 								<p class="fs-6 m-0">
-									<b>Nome:</b> ${categoria.nomeCategoria}
+									<b>Nome:</b> ${loja.nomeLoja}
 								</p>
 							</div>
 							<hr>
 							<div class="d-grid gap-2 col-6">
 								<a class="btn btn-primary btn-sm"
-									href="${contextPath}/categorias">Voltar</a>
+									href="${contextPath}/lojas">Voltar</a>
 							</div>
 						</form>
 					</div>
