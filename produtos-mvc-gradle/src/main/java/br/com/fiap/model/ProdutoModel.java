@@ -48,7 +48,7 @@ public class ProdutoModel {
 	}
 
 	public ProdutoModel(Long id, String nome, String sku, String descricao, Float preco, String caracteristicas,
-			CategoriaModel categoria, List<LojaModel> lojas) {
+			CategoriaModel categoria, MarcaModel marca, List<LojaModel> lojas) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -57,6 +57,7 @@ public class ProdutoModel {
 		this.preco = preco;
 		this.caracteristicas = caracteristicas;
 		this.categoria = categoria;
+		this.marca = marca;
 		this.lojas = lojas;
 	}
 
