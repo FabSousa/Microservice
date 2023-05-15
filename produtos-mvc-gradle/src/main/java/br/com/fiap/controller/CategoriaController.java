@@ -1,9 +1,11 @@
 package br.com.fiap.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,12 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fiap.model.CategoriaModel;
 import br.com.fiap.repository.CategoriaRepository;
 
-@Controller
+@RestController
 @RequestMapping("/categorias")
 public class CategoriaController {
 
@@ -29,9 +32,9 @@ public class CategoriaController {
 	public CategoriaRepository repository;
 	
 	@GetMapping
-	public String findAll(Model model) {
-		model.addAttribute("categorias", repository.findAll());
-		return CATEGORIA_FOLDER+"categorias";
+	public ResponseEntity<List<CategoriaModel>> findAll(Model model) {
+		//model.addAttribute("categorias", repository.findAll());
+		return ResponseEntity.ok(repository.findAll());
 	}
 	
 	@GetMapping("/form")

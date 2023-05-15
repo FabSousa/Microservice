@@ -1,11 +1,9 @@
 package br.com.fiap.controller;
 
-import java.math.BigDecimal;
-
-import javax.validation.Valid;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,14 +14,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fiap.model.ProdutoModel;
 import br.com.fiap.repository.CategoriaRepository;
 import br.com.fiap.repository.MarcaRepository;
 import br.com.fiap.repository.ProdutoRepository;
+import jakarta.validation.Valid;
 
-@Controller
+@RestController
 @RequestMapping("/produtos")
 public class ProdutoController {
 
@@ -37,10 +37,11 @@ public class ProdutoController {
 	private static final String PRODUTO_FOLDER = "produto/";
 
 	@GetMapping
-	public String findAll(Model model) {
-		model.addAttribute("produtos", repository.findAll());
+	public ResponseEntity<List<ProdutoModel>> findAll(Model model) {
 		//model.addAttribute("produtos", repository.findProdutosByCategory(new BigDecimal(1), "notebook"));
-		return PRODUTO_FOLDER+"produtos";
+		//model.addAttribute("produtos", produtos);
+		return ResponseEntity.ok(repository.findAll());
+		//return PRODUTO_FOLDER+"produtos";
 	}
 
 	@GetMapping("/form")

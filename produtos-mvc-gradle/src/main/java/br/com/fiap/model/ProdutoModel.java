@@ -29,11 +29,11 @@ public class ProdutoModel {
 	private Float preco;
 	private String caracteristicas;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_CATEGORIA", nullable = false)
 	private CategoriaModel categoria;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_MARCA", nullable = false)
 	private MarcaModel marca;
 	
