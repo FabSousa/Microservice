@@ -1,5 +1,7 @@
 package br.com.fiap.controller;
 
+import java.math.BigDecimal;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,7 @@ public class ProdutoController {
 	@GetMapping
 	public String findAll(Model model) {
 		model.addAttribute("produtos", repository.findAll());
+		//model.addAttribute("produtos", repository.findProdutosByCategory(new BigDecimal(1), "notebook"));
 		return PRODUTO_FOLDER+"produtos";
 	}
 
@@ -75,7 +78,8 @@ public class ProdutoController {
 	public String update(@PathVariable("id") long id, Model model, @Valid ProdutoModel produtoModel,
 			RedirectAttributes redirectAttributes) {
 		produtoModel.setId(id);
-		repository.save(produtoModel);
+		//repository.save(produtoModel);
+		repository.updateProjectNameAndSku(produtoModel.getNome(), produtoModel.getSku(), id);
 		redirectAttributes.addFlashAttribute("messages", "Produto atualizado com sucesso!");
 		model.addAttribute("produtos", repository.findAll());
 		return "redirect:/produtos";
@@ -83,7 +87,8 @@ public class ProdutoController {
 
 	@DeleteMapping("/{id}")
 	public String delete(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes) {
-		repository.deleteById(id);
+		//repository.deleteById(id);
+		repository.deleteProdutoById(id);
 		redirectAttributes.addFlashAttribute("messages", "Produto excluído com sucesso!");
 		model.addAttribute("produtos", repository.findAll());
 		return "redirect:/produtos";
