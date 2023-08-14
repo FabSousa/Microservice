@@ -35,10 +35,10 @@ public class PagamentoController {
 	public ResponseEntity<PagamentoDTO> insert(@Valid @RequestBody PagamentoDTO dto){
 		dto = service.insert(dto);
 
-		URI url = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
 
-		return  ResponseEntity.created(url).body(dto);
+		return  ResponseEntity.created(uri).body(dto);
 	}
 
 	@PutMapping("/{id}")
