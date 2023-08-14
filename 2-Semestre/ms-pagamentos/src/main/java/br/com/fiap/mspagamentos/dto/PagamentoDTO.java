@@ -1,6 +1,7 @@
 package br.com.fiap.mspagamentos.dto;
 
 import br.com.fiap.mspagamentos.model.Pagamento;
+import br.com.fiap.mspagamentos.model.Status;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -12,8 +13,8 @@ public class PagamentoDTO {
     private String nome;
     private String numeroDoCartao;
     private String validade;
-    private String cofigo;
-    private String status;
+    private String codigo;
+    private Status status;
     private Long pedidoId;
     private Long formaDePagamento;
 
@@ -27,8 +28,8 @@ public class PagamentoDTO {
         this.nome = entity.getNome();
         this.numeroDoCartao = entity.getNumerocartao();
         this.validade = entity.getValidade();
-        this.cofigo = entity.getCodigo();
-        this.status = entity.getStatus().name();
+        this.codigo = entity.getCodigo();
+        this.status = entity.getStatus();
         this.pedidoId = entity.getPedidoId();
         this.formaDePagamento = entity.getFormaDePagamentoId();
     }
@@ -53,11 +54,11 @@ public class PagamentoDTO {
         return validade;
     }
 
-    public String getCofigo() {
-        return cofigo;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
