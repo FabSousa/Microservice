@@ -3,11 +3,8 @@ package br.com.fiap.mspagamentos.model;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_pagamento")
@@ -21,7 +18,9 @@ public class Pagamento {
 	private String numeroDoCartao;
 	private String validade;
 	private String codigo;
-	private String status;
+	@NotNull(message = "Campo requerido")
+	@Enumerated(EnumType.STRING)
+	private Status status;
 	private Long pedidoId;
 	private Long formaDePagamentoId; // 1 - Cartao  2 - Dinheiro
 	
@@ -30,7 +29,7 @@ public class Pagamento {
 	}
 
 	public Pagamento(Long id, BigDecimal valor, String nome, String numerocartao, String validade, String codigo,
-			String status, Long pedidoId, Long formaDePagamentoId) {
+			Status status, Long pedidoId, Long formaDePagamentoId) {
 		super();
 		this.id = id;
 		this.valor = valor;
@@ -91,11 +90,11 @@ public class Pagamento {
 		this.codigo = codigo;
 	}
 
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
