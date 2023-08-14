@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_pagamento")
@@ -13,15 +15,23 @@ public class Pagamento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotNull(message = "Campo requerido")
+	@Positive(message = "o valor deve ser um numero positivo")
 	private BigDecimal valor;
+	@Size(max = 150, message = "Tamanho maximo do campo: ate 150 caracteres")
 	private String nome;
+	@Size(max = 20, message = "Tamanho maximo do campo: ate 20 caracteres")
 	private String numeroDoCartao;
+	@Size(max = 7, message = "Tamanho maximo do campo: ate 7 caracteres")
 	private String validade;
+	@Size(max = 3, min = 3, message = "Tamanho do campo: 3 caracteres")
 	private String codigo;
 	@NotNull(message = "Campo requerido")
 	@Enumerated(EnumType.STRING)
 	private Status status;
+	@NotNull(message = "Campo requerido")
 	private Long pedidoId;
+	@NotNull(message = "Campo requerido")
 	private Long formaDePagamentoId; // 1 - Cartao  2 - Dinheiro
 	
 	public Pagamento() {
