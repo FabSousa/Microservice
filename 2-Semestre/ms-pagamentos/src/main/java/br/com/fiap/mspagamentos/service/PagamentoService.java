@@ -4,6 +4,7 @@ import br.com.fiap.mspagamentos.dto.PagamentoDTO;
 import br.com.fiap.mspagamentos.model.Pagamento;
 import br.com.fiap.mspagamentos.model.Status;
 import br.com.fiap.mspagamentos.repository.PagamentoRepository;
+import br.com.fiap.mspagamentos.service.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +29,8 @@ public class PagamentoService {
 
     @Transactional(readOnly = true)
     public PagamentoDTO findById(long id){
-        Optional<Pagamento> result = repository.findById(id);
-        Pagamento pagamento = result.get();
+        Pagamento pagamento = repository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Recurson não encontrado: " + id));
         PagamentoDTO dto = new PagamentoDTO(pagamento);
         return dto;
     }
@@ -50,7 +51,7 @@ public class PagamentoService {
             entity = repository.save(entity);
             return new PagamentoDTO(entity);
         } catch (EntityNotFoundException e){
-            throw new EntityNotFoundException("Recurso nao encontrado, ID: " + id);
+            throw new ResourceNotFoundException("Recurso nao encontrado, ID: " + id);
         }
     }
 
