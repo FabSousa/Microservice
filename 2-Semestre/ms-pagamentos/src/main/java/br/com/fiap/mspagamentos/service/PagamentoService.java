@@ -4,8 +4,10 @@ import br.com.fiap.mspagamentos.dto.PagamentoDTO;
 import br.com.fiap.mspagamentos.model.Pagamento;
 import br.com.fiap.mspagamentos.model.Status;
 import br.com.fiap.mspagamentos.repository.PagamentoRepository;
+import br.com.fiap.mspagamentos.service.exception.DatabaseException;
 import br.com.fiap.mspagamentos.service.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,8 +58,35 @@ public class PagamentoService {
     }
 
     @Transactional
+    public void confirmarPagamento(Long id){
+        Optional<Pagamento> pagamento = repository.findById(id);
+        if(!pagamento.isPresent()){
+            throw new ResourceNotFoundException("Recurso não encotrado");
+        }
+        pagamento.get().setStatus(Status.CONFIRMADO);
+        repository.save(pagamento.get());
+    }
+
+    @Transactional
+    public void cancelarPagamento(Long id){
+        Optional<Pagamento> pagamento = repository.findById(id);
+        if(!pagamento.isPresent()){
+            throw new ResourceNotFoundException("Recurso não encotrado");
+        }
+        pagamento.get().setStatus(Status.CANCELADO);
+        repository.save(pagamento.get());
+    }
+
+    @Transactional
     public void delete(Long id){
-        repository.deleteById(id);
+        if(!repository.existsById(id)){
+            throw new ResourceNotFoundException("Recurso não encontrado");
+        }
+        try {
+            repository.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DatabaseException("Recurso não encontrado");
+        }
     }
 
     private void copyDtoToEntity(PagamentoDTO dto, Pagamento entity){

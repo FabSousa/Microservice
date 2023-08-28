@@ -53,5 +53,15 @@ public class PagamentoController {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+
+	@PatchMapping("/{id}/confirmar")
+	public void confirmarPagamento(@PathVariable Long id){
+		service.confirmarPagamento(id);
+	}
+
+	@PatchMapping("/{id}/cancelar")
+	public void cancelarPagamento(@PathVariable Long id){
+		service.cancelarPagamento(id);
+	}
 	
 }
