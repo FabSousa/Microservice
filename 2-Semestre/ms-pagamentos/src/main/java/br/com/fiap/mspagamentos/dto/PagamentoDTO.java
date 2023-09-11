@@ -30,6 +30,18 @@ public class PagamentoDTO {
 
     }
 
+    public PagamentoDTO(Long id, BigDecimal valor, String nome, String numeroDoCartao, String validade, String codigo, Status status, Long pedidoId, Long formaDePagamento) {
+        this.id = id;
+        this.valor = valor;
+        this.nome = nome;
+        this.numeroDoCartao = numeroDoCartao;
+        this.validade = validade;
+        this.codigo = codigo;
+        this.status = status;
+        this.pedidoId = pedidoId;
+        this.formaDePagamento = formaDePagamento;
+    }
+
     public PagamentoDTO(Pagamento entity) {
         this.id = entity.getId();
         this.valor = entity.getValor();
