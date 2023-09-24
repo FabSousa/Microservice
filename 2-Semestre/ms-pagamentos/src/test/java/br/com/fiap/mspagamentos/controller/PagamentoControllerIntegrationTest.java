@@ -79,11 +79,12 @@ public class PagamentoControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Deve salvar um pagamneto, retornar status 201 e location no header")
+    @DisplayName("Insert deve salvar um pagamneto, retornar status 201 e location no header")
     public void InseertDeveSalvarPagamento() throws Exception{
         Pagamento entity = Factory.createPagamento();
         entity.setId(null);
-        String corpoJson = objectMapper.writeValueAsString(entity);
+        PagamentoDTO dto = new PagamentoDTO(entity);
+        String corpoJson = objectMapper.writeValueAsString(dto);
 
         mockMvc.perform(post("/pagamentos")
                     .content(corpoJson)
@@ -94,15 +95,16 @@ public class PagamentoControllerIntegrationTest {
                 .andExpect(header().exists("Location"))
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.valor").exists())
-                .andExpect(jsonPath("$.nome").value("Bach"));
+                .andExpect(jsonPath("$.nome").value("Beach"));;
     }
 
     @Test
-    @DisplayName("Deve salvar um pagamento com os capos obrigatorios, retornar status 201 e location no header")
+    @DisplayName("Insert deve salvar um pagamento com os capos obrigatorios, retornar status 201 e location no header")
     public void insertDeveSalvarPagamentoComposObrigatorios() throws Exception{
         Pagamento entity = new Pagamento(null, BigDecimal.valueOf(25.25),null,null,null,
                 null, Status.CRIADO, 1L, 1L);
-        String corpoJson = objectMapper.writeValueAsString(entity);
+        PagamentoDTO dto = new PagamentoDTO(entity);
+        String corpoJson = objectMapper.writeValueAsString(dto);
 
         mockMvc.perform(post("/pagamentos")
                         .content(corpoJson)
