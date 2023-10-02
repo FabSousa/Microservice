@@ -1,17 +1,15 @@
-package br.com.fiap.mspagamentos;
+package br.com.fiap.mspedidos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableFeignClients
-public class MicroservicosDePagamentosApplication {
+public class MsPedidosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MicroservicosDePagamentosApplication.class, args);
+		SpringApplication.run(MsPedidosApplication.class, args);
 	}
 
 }
