@@ -1,6 +1,7 @@
 package br.com.fiap.mspagamentos.service;
 
 import br.com.fiap.mspagamentos.dto.PagamentoDTO;
+import br.com.fiap.mspagamentos.http.PedidoClient;
 import br.com.fiap.mspagamentos.model.Pagamento;
 import br.com.fiap.mspagamentos.model.Status;
 import br.com.fiap.mspagamentos.repository.PagamentoRepository;
@@ -18,6 +19,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class PagamentoService {
+
+    @Autowired
+    private PedidoClient pedidoClient;
 
     @Autowired
     private PagamentoRepository repository;
@@ -65,6 +69,8 @@ public class PagamentoService {
         }
         pagamento.get().setStatus(Status.CONFIRMADO);
         repository.save(pagamento.get());
+
+        pedidoClient.atualizarPagamentoPedido(pagamento.get().getPedidoId());
     }
 
     @Transactional
