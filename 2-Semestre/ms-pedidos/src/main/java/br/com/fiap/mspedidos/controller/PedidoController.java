@@ -34,7 +34,7 @@ public class PedidoController {
 
     @PostMapping
     public ResponseEntity<PedidoDTO> insert(@RequestBody @Valid PedidoDTO dto,
-                                            UriComponentsBuilder uriBuilder){
+                                            UriComponentsBuilder uriBuilder) {
         dto = service.insert(dto);
         URI uri = uriBuilder.path("/pedidos/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
@@ -42,13 +42,18 @@ public class PedidoController {
 
     @PutMapping("/{id}/pago")
     public ResponseEntity<Void> aprovarPagamentoPedido(@PathVariable @NotNull Long id){
+
         service.aprovarPagamentoPedido(id);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}/status")
-    public ResponseEntity<PedidoDTO> updateStatus(@PathVariable Long id, @RequestBody StatusDTO statusDTO){
-        PedidoDTO dto = service.uodateStatus(id, statusDTO);
+    public ResponseEntity<PedidoDTO> updateStatus(@PathVariable Long id,
+                                                  @RequestBody StatusDTO statusDTO){
+
+        PedidoDTO dto = service.updateStatus(id, statusDTO);
         return ResponseEntity.ok(dto);
     }
+
+
 }

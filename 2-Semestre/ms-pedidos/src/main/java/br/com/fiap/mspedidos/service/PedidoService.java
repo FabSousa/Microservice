@@ -37,12 +37,13 @@ public class PedidoService {
         ) ;
 
         return new PedidoDTO(pedido);
-
     }
 
+    // Inserir um pedido no DB
     @Transactional
-    public PedidoDTO insert(PedidoDTO dto){
+    public PedidoDTO insert(PedidoDTO dto) {
         Pedido pedido = new Pedido();
+        // método auxiliar para converter DtoToEntity
         copyDtoToEntity(dto, pedido);
         pedido = repository.save(pedido);
         return new PedidoDTO(pedido);
@@ -59,8 +60,10 @@ public class PedidoService {
         repository.updateStatus(Status.PAGO, pedido);
     }
 
-    public PedidoDTO uodateStatus(Long id, StatusDTO statusDTO){
+    // Atualizar Status do Pedido
+    public PedidoDTO updateStatus(Long id, StatusDTO statusDTO){
         Pedido pedido = repository.getByIdWithItems(id);
+
         if(pedido == null){
             throw new EntityNotFoundException("Recurso não encontrado");
         }
@@ -70,11 +73,12 @@ public class PedidoService {
         return new PedidoDTO(pedido);
     }
 
-    private void copyDtoToEntity(PedidoDTO dto, Pedido entity){
+
+    private void copyDtoToEntity(PedidoDTO dto, Pedido entity) {
         entity.setDataHora(LocalDateTime.now());
         entity.setStatus(Status.REALIZADO);
         List<ItemDoPedido> itens = new ArrayList<>();
-        for (ItemDoPedidoDTO item : dto.getItens()){
+        for (ItemDoPedidoDTO item : dto.getItens()) {
             ItemDoPedido itemDoPedido = new ItemDoPedido();
             itemDoPedido.setDescricao(item.getDescricao());
             itemDoPedido.setQuantidade(item.getQuantidade());
