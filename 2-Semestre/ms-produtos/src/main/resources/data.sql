@@ -1,3 +1,6 @@
+INSERT INTO tb_user (email, password) VALUES ('pedro@gmail.com', '$2a$10$aIm3A0mB0gRP9G7v6TRMt.QAwK2qJNQAVysnITLfcZZ3rqip4VMTy');
+INSERT INTO tb_user (email, password) VALUES ('ana@gmail.com', '$2a$10$aIm3A0mB0gRP9G7v6TRMt.QAwK2qJNQAVysnITLfcZZ3rqip4VMTy');
+
 INSERT INTO  tb_categoria (nome) VALUES('Eletrônicos');
 INSERT INTO  tb_categoria (nome) VALUES('Livros');
 INSERT INTO  tb_categoria (nome) VALUES('Informática');
